@@ -1,4 +1,4 @@
-import '../instructor_member.dart';
+import 'instructor_member.dart';
 import 'course.dart';
 import 'employee_member.dart';
 import 'student_member.dart';

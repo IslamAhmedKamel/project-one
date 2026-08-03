@@ -1,7 +1,7 @@
 import 'dart:developer';
-import 'lib/course.dart';
-import 'lib/person.dart';
-import 'lib/university_member.dart';
+import 'course.dart';
+import 'person.dart';
+import 'university_member.dart';
 
 class InstructorMember extends Person implements UniversityMember {
   int? _id;
