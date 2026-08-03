@@ -7,7 +7,7 @@ void main() {
     role: "Student",
     coursesList: [
       Course(course: "Data analysis"),
-      Course(course: "Flutter Developer"),
+      Course(course: "Flutter Developer"),  
     ],
     gradesList: [10, 20],
     id: 1212,
@@ -15,7 +15,7 @@ void main() {
   std1.displayInfo();
   StudentMember std2 = StudentMember(
     name: "Adel Hany Ahmed",
-    role: "Student",
+    // role: "Student",
     coursesList: [
       Course(course: "Frontend Developer"),
       Course(course: "Backend Developer"),

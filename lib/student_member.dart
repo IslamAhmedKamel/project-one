@@ -13,7 +13,7 @@ class StudentMember extends Person implements UniversityMember {
   StudentMember({
     required this.name,
     required this._id,
-    required this.role,
+    this.role,
     required this.coursesList,
     required this.gradesList,
   }) : super(name: name, role: role);
@@ -21,11 +21,11 @@ class StudentMember extends Person implements UniversityMember {
   set setId(int id) => this._id = id;
   @override
   void displayInfo() {
-    log("name is :$name    Role is :$role   Id :${this._id}");
-    for (var course in coursesList ?? []) {
-      log("Course: ${course}");
-    }
-    log("Avarege is : ${calculateAverage()}");
+    log("name is :$name    Role is :${this.getRole()}   Id :${this._id}");
+
+    log(" ${this.name} has :${coursesList}");
+
+    log("Avarege  grades for ${this.name} is: ${calculateAverage()}");
     log("*********************************");
   }
 
