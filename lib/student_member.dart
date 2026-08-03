@@ -23,7 +23,10 @@ class StudentMember extends Person implements UniversityMember {
   void displayInfo() {
     log("name is :$name    Role is :${this.getRole()}   Id :${this._id}");
 
-    log(" ${this.name} has :${coursesList}");
+    log(
+      // " ${this.name} has :${coursesList ?? "هذا الطالب لم يحضر اي  كورس خلال هذه الدورة "}",
+      "${coursesList!.isNotEmpty ? '${name}He explains ${coursesList}' : "لم يحضر  أي كورس خلال هذه الدورة $name"}",
+    );
 
     log("Avarege  grades for ${this.name} is: ${calculateAverage()}");
     log("*********************************");

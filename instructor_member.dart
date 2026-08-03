@@ -20,7 +20,9 @@ class InstructorMember extends Person implements UniversityMember {
   void displayInfo() {
     log("name is :$name    Role is :$role   Id :${this._id}");
 
-    log(" ${this.name} He explains :${coursesList}");
+    log(
+      "${coursesList!.isNotEmpty ? '${name}He explains ${coursesList}' : "لم يشرح شيء هذه الدورة $name"}",
+    );
     log("*********************************");
   }
 
@@ -28,4 +30,7 @@ class InstructorMember extends Person implements UniversityMember {
   String getRole() {
     return this.role ?? "Unknow";
   }
+
+
+
 }
