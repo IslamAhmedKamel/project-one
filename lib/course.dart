@@ -1,10 +1,16 @@
-class Course {
-  String course;
+import 'dart:developer';
 
-  Course({required this.course});
+class Courses {
+  String courseName;
+
+  Courses({required this.courseName});
 
   @override
   String toString() {
-    return course; // كده لما تطبعه هيطبع الاسم على طول
+    return courseName; // كده لما تطبعه هيطبع الاسم على طول
+  }
+
+  void displayInfo() {
+    log('courseName is: ${courseName}');
   }
 }
