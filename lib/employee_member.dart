@@ -1,24 +1,23 @@
-import 'dart:developer';
-
 import 'person.dart';
 import 'university_member.dart';
+import 'validators.dart';
 
 class EmployeeMember extends Person implements UniversityMember {
-  int? _id;
-  String? name;
-  String? role;
-  EmployeeMember({required this.name, required this._id, this.role})
-    : super(name: name, role: role);
-  int get getId => this._id ?? 0;
-  set setId(int id) => this._id = id;
+  int _id;
+
+  EmployeeMember({required super.name, required int id, super.role})
+      : _id = validateId(id);
+
+  int get getId => _id;
+
+  set setId(int id) => _id = validateId(id);
+
   @override
   void displayInfo() {
-    log("name is :$name    Role is :$role   Id :${this._id}");
-    log("*********************************");
+    print('name is :$name    Role is :${getRole()}   Id :$_id');
+    print('*********************************');
   }
 
   @override
-  String getRole() {
-    return this.role ?? "Unknow";
-  }
+  String getRole() => role ?? 'Unknown';
 }

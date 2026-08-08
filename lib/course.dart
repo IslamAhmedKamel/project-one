@@ -1,16 +1,18 @@
-import 'dart:developer';
+import 'exceptions.dart';
 
 class Courses {
-  String courseName;
+  final String courseName;
 
-  Courses({required this.courseName});
-
-  @override
-  String toString() {
-    return courseName; // كده لما تطبعه هيطبع الاسم على طول
+  Courses({required this.courseName}) {
+    if (courseName.trim().isEmpty) {
+      throw ValidationException('courseName must not be empty');
+    }
   }
 
+  @override
+  String toString() => courseName;
+
   void displayInfo() {
-    log('courseName is: ${courseName}');
+    print('courseName is: $courseName');
   }
 }

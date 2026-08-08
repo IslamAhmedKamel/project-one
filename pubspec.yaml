@@ -1,0 +1,10 @@
+name: project_one
+description: Dart OOP university system exercise.
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+
+dev_dependencies:
+  lints: ^5.0.0
+  test: ^1.25.0
