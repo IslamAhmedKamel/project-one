@@ -1,0 +1,9 @@
+name: project_one
+description: A Dart OOP university system project.
+publish_to: none
+
+environment:
+  sdk: ^3.12.0
+
+dev_dependencies:
+  test: ^1.25.8
