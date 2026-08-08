@@ -1,35 +1,26 @@
 import 'course.dart';
 import 'person.dart';
-import 'university_member.dart';
+import 'utils.dart';
 
-class InstructorMember extends Person implements UniversityMember {
-  int? _id;
-  String? name;
-  String? role;
+class InstructorMember extends Person {
   List<Courses>? coursesList;
-  InstructorMember({
-    required this.name,
-    required this._id,
-    this.role,
-    required this.coursesList,
-  }) : super(name: name, role: role);
-  @override
-  String toString() {
-    return name!; // كده لما تطبعه هيطبع الاسم على طول
-  }
 
-  int get getId => this._id ?? 0;
-  set setId(int id) => this._id = id;
+  InstructorMember({
+    required String name,
+    required int id,
+    String? role,
+    required this.coursesList,
+  }) : super(name: name, id: id, role: role);
+
   @override
   void displayInfo() {
-    print("name is :$name    Role is :${this.getRole()}   Id :${this._id}");
-    print(
-      "${coursesList!.isNotEmpty ? '${name} He explains ${coursesList}' : "لم يشرح شيء هذه الدورة $name"}",
+    super.displayInfo();
+    logInfo(
+      describeList(
+        coursesList,
+        whenPresent: '$name He explains $coursesList',
+        whenEmpty: "لم يشرح شيء هذه الدورة $name",
+      ),
     );
-  }
-
-  @override
-  String getRole() {
-    return this.role ?? "Unknow";
   }
 }
