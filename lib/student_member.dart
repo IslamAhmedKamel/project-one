@@ -1,64 +1,78 @@
-import 'dart:developer';
-
 import 'course.dart';
+import 'exceptions.dart';
 import 'instructor_member.dart';
 import 'person.dart';
 import 'university_member.dart';
+import 'validators.dart';
 
 class StudentMember extends Person implements UniversityMember {
-  int _id = 0;
-  final String name;
-  String? role;
-  List<Courses>? coursesList;
+  int _id;
+  final List<Courses> coursesList;
   final List<InstructorMember> instructors;
-  List<double> gradesList;
+  final List<double> gradesList;
+
   StudentMember({
-    required this.name,
-    required this._id,
-    this.role,
-    required this.coursesList,
-    required this.gradesList,
-    required this.instructors,
-  }) : super(name: name, role: role);
-  int get getId => this._id;
-  set setId(int id) => this._id = id;
+    required super.name,
+    required int id,
+    super.role,
+    required List<Courses> coursesList,
+    required List<double> gradesList,
+    required List<InstructorMember> instructors,
+  })  : _id = validateId(id),
+        coursesList = List<Courses>.from(coursesList),
+        instructors = List<InstructorMember>.from(instructors),
+        gradesList = List<double>.from(validateGrades(gradesList));
+
+  int get getId => _id;
+
+  set setId(int id) => _id = validateId(id);
+
   @override
-  String toString() {
-    return name; // كده لما تطبعه هيطبع الاسم على طول
-  }
+  String toString() => name;
 
   @override
   void displayInfo() {
-    log("name is :$name    Role is :${this.getRole()}   Id :${this._id}");
-    log(
-      "${coursesList!.isNotEmpty ? '${name} He register this: ${coursesList}' : "لم يحضر  أي كورس خلال هذه الدورة $name"}",
+    print('name is :$name    Role is :${getRole()}   Id :$_id');
+    print(
+      coursesList.isNotEmpty
+          ? '$name He register this: $coursesList'
+          : 'لم يحضر  أي كورس خلال هذه الدورة $name',
     );
-    log(
-      "${coursesList!.isNotEmpty ? '${instructors} بيشرحله المهندس' : "لم يحضر أي كورس خلال هذه الدورة $name"}",
+    print(
+      instructors.isNotEmpty
+          ? '$instructors بيشرحله المهندس'
+          : 'لا يوجد مهندس مسؤول عن $name',
     );
-    log(
-      "Avarege  grades for ${this.name} is: ${gradesList.isEmpty ? 'لا يوجد درجات برجاء إضافة الدرجات والاعادة' : this.calculateAverage()}",
+    print(
+      'Avarege  grades for $name is: '
+      '${hasGrades ? calculateAverage() : 'لا يوجد درجات برجاء إضافة الدرجات والاعادة'}',
     );
 
-    for (var inst in instructors) {
-       inst.displayInfo();
+    for (final inst in instructors) {
+      inst.displayInfo();
     }
-    print("*********************************");
+    print('*********************************');
   }
 
+  bool get hasGrades => gradesList.isNotEmpty;
+
+  /// Average of [gradesList].
+  ///
+  /// Throws [NoGradesException] when the student has no grades yet; callers
+  /// that want a placeholder should check [hasGrades] first.
   double calculateAverage() {
-    double result = 0;
-    if (coursesList!.isNotEmpty) {
-      for (var grade in gradesList) {
-        result = grade + result;
-      }
-      return result / gradesList.length;
+    if (gradesList.isEmpty) {
+      throw NoGradesException('student $name ($_id) has no grades');
     }
-    return 0.0;
+    final total = gradesList.reduce((a, b) => a + b);
+    return total / gradesList.length;
+  }
+
+  void addGrade(double grade) {
+    validateGrades([grade]);
+    gradesList.add(grade);
   }
 
   @override
-  String getRole() {
-    return this.role ?? "Unknow";
-  }
+  String getRole() => role ?? 'Unknown';
 }
