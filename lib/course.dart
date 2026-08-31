@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'utils.dart';
 
 class Courses {
   String courseName;
@@ -6,11 +6,9 @@ class Courses {
   Courses({required this.courseName});
 
   @override
-  String toString() {
-    return courseName; // كده لما تطبعه هيطبع الاسم على طول
-  }
+  String toString() => courseName;
 
   void displayInfo() {
-    log('courseName is: ${courseName}');
+    logInfo('courseName is: $courseName');
   }
 }

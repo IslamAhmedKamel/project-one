@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'employee_member.dart';
 import 'instructor_member.dart';
 import 'course.dart';
 import 'student_member.dart';
 import 'university_system.dart';
+import 'utils.dart';
 
 void main() {
   Courses backEnd = Courses(courseName: "BackEnd");
@@ -24,6 +23,7 @@ void main() {
     coursesList: [flutter, ai],
   );
   EmployeeMember emp1 = EmployeeMember(name: "hassan", id: 22);
+  emp1.displayInfo();
   StudentMember islam = StudentMember(
     name: "Islam ",
     role: "Student",
@@ -67,6 +67,6 @@ void main() {
   system.addInstractor(inst: ahmed);
   system.addInstractor(inst: hassan);
   system.addInstractor(inst: adel);
-  log("------------------------------");
+  logInfo(sectionSeparator);
   system.displayInstractor();
 }

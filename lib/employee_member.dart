@@ -1,24 +1,13 @@
-import 'dart:developer';
-
 import 'person.dart';
-import 'university_member.dart';
+import 'utils.dart';
 
-class EmployeeMember extends Person implements UniversityMember {
-  int? _id;
-  String? name;
-  String? role;
-  EmployeeMember({required this.name, required this._id, this.role})
-    : super(name: name, role: role);
-  int get getId => this._id ?? 0;
-  set setId(int id) => this._id = id;
+class EmployeeMember extends Person {
+  EmployeeMember({required String name, required int id, String? role})
+    : super(name: name, id: id, role: role);
+
   @override
   void displayInfo() {
-    log("name is :$name    Role is :$role   Id :${this._id}");
-    log("*********************************");
-  }
-
-  @override
-  String getRole() {
-    return this.role ?? "Unknow";
+    super.displayInfo();
+    logInfo(memberSeparator);
   }
 }
